@@ -1,7 +1,14 @@
-cargo-features = ["edition2021"]
 [package]
-name = "project_builder"
+name = "rusco"
 version = "0.1.0"
+author = "Scott Walls"
+description = "A simple tool to run complex commands from anywhere"
+readme = "README.md"
+license = "MIT"
+homepage = "https://github.com/numine777/project_builder"
+repository = "https://github.com/numine777/project_builder"
+keywords = ["rusco", "command", "runner", "runner", "tool"]
+catgories = ["command-line-utilities"]
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
