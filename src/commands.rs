@@ -1,11 +1,11 @@
 use tokio::process::Command;
 use crate::config::Config;
-use std::error::Error;
 use std::path::Path;
-use std::process::Output;
+// use std::error::Error;
+// use std::process::Output;
 
 #[tokio::main]
-pub async fn execute_build(config_path: &str) {
+pub async fn execute_command(config_path: &str) {
     let config = Config::from_file(config_path).unwrap();
     let _command = Command::new(&config.build_command)
         .args(&config.args)
@@ -14,29 +14,29 @@ pub async fn execute_build(config_path: &str) {
         .spawn();
 }
 
-pub fn set_build_command(config_path: &str) {
-    let mut build_command = String::new();
-    println!("Enter a build command");
-    std::io::stdin().read_line(&mut build_command).unwrap();
+pub fn set_command(config_path: &str) {
+    let mut execution_command = String::new();
+    println!("Enter a command to run");
+    std::io::stdin().read_line(&mut execution_command).unwrap();
     let mut config = Config::from_file(config_path).unwrap();
-    config.set_build_command(&build_command.trim());
+    config.set_execution_command(&execution_command.trim());
     config.to_file(config_path).unwrap();
 }
 
-pub fn set_build_dir(config_path: &str) {
-    let mut build_dir = String::new();
-    println!("Enter a build command");
-    std::io::stdin().read_line(&mut build_dir).unwrap();
+pub fn set_execution_dir(config_path: &str) {
+    let mut execution_dir = String::new();
+    println!("Enter a execution command");
+    std::io::stdin().read_line(&mut execution_dir).unwrap();
     let mut config = Config::from_file(config_path).unwrap();
-    config.set_dir(&build_dir.trim());
+    config.set_dir(&execution_dir.trim());
     config.to_file(config_path).unwrap();
 }
 
-pub fn set_build_args(config_path: &str) {
-    let mut build_args = String::new();
-    println!("Enter a build argument");
-    std::io::stdin().read_line(&mut build_args).unwrap();
-    let args = build_args
+pub fn set_execution_args(config_path: &str) {
+    let mut execution_args = String::new();
+    println!("Enter a command argument");
+    std::io::stdin().read_line(&mut execution_args).unwrap();
+    let args = execution_args
         .split(" ")
         .map(|x| x.trim().to_string())
         .collect::<Vec<String>>();
@@ -45,11 +45,11 @@ pub fn set_build_args(config_path: &str) {
     config.to_file(config_path).unwrap();
 }
 
-pub fn set_build_flags(config_path: &str) {
-    let mut build_flags = String::new();
-    println!("Enter a build argument");
-    std::io::stdin().read_line(&mut build_flags).unwrap();
-    let args = build_flags
+pub fn set_execution_flags(config_path: &str) {
+    let mut execution_flags = String::new();
+    println!("Enter a execution argument");
+    std::io::stdin().read_line(&mut execution_flags).unwrap();
+    let args = execution_flags
         .split(" ")
         .map(|x| x.trim().to_string())
         .collect::<Vec<String>>();
@@ -68,6 +68,13 @@ pub fn clear_args(config_path: &str) {
     let mut config = Config::from_file(config_path).unwrap();
     config.clear_args();
     config.to_file(config_path).unwrap();
+}
+
+pub fn list_configs(config_path: &str) {
+    let configs = Config::list_configs(config_path).unwrap();
+    for config in configs {
+        println!("{}", config);
+    }
 }
 
 // Broken, fix this

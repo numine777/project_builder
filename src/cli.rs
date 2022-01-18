@@ -2,8 +2,8 @@ use clap::Parser;
 
 #[derive(Parser, Debug)]
 pub struct CLI {
-    // #[clap(short, long, default_value = "search")]
+    #[clap(default_value = "init")]
+    pub command: String,
+    #[clap(default_value = "")]
     pub project_name: String,
-    #[clap(short, long, default_value = "run")]
-    pub subcommand: String,
 }

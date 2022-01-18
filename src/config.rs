@@ -36,10 +36,22 @@ impl Config {
         };
         config.to_file(path)
     }
+    pub fn list_configs(configs_dir: &str) -> Result<Vec<String>, std::io::Error> {
+        let mut configs = Vec::new();
+        for entry in std::fs::read_dir(configs_dir)? {
+            let entry = entry?;
+            let path = entry.path();
+            if path.is_file() {
+                let file_name = path.file_name().unwrap().to_str().unwrap();
+                configs.push(file_name.to_string());
+            }
+        }
+        Ok(configs)
+    }
     pub fn set_dir(&mut self, dir: &str) {
         self.project_dir = dir.to_string();
     }
-    pub fn set_build_command(&mut self, command: &str) {
+    pub fn set_execution_command(&mut self, command: &str) {
         self.build_command = command.to_string();
     }
     pub fn set_args(&mut self, args: Vec<String>) {

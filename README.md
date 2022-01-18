@@ -12,13 +12,14 @@ To install the program, simply run:
 Current usage examples:
 
 ```
-rusco <project_name> // this will init the json configuration for the project NOTE: this runs "build" by default once the initial json is created
-rusco <project_name> -s set_command <command name> // this needs to be a single string
-unbroken by whitespace (e.g. 'bazel' or 'docker-compose')
-rusco <project_name> -s set_dir <absolute path the command needs to run in>
-rusco <project_name> -s set_args <all args that should follow the command>
-rusco <project_name> -s clear_args <clears all args>
-rusco <project_name> -s set_flags <optional flags that should always follow args>
-rusco <project_name> -s clear_flags <clears all flags>
+rusco init <project_name>
+rusco list // this will list configuratios for commands
+rusco set_command <project_name> // this needs to be a single string unbroken by whitespace (e.g. 'bazel' or 'docker-compose')
+rusco set_dir <project_name>
+rusco set_args <project_name>
+rusco clear_args <project_name>
+rusco set_flags <project_name>
+rusco clear_flags <project_name>
+rusco run <project_name>
 ```
 
