@@ -23,7 +23,7 @@ fn init() -> String {
 }
 
 fn handle_command(command: &str, config_path: &str) {
-    if command == "build" {
+    if command == "run" {
         commands::execute_build(&config_path);
     }
     if command == "set_command" {
@@ -35,8 +35,14 @@ fn handle_command(command: &str, config_path: &str) {
     if command == "set_args" {
         commands::set_build_args(&config_path);
     }
+    if command == "clear_args" {
+        commands::clear_args(&config_path);
+    }
     if command == "set_flags" {
         commands::set_build_flags(&config_path);
+    }
+    if command == "clear_flags" {
+        commands::clear_flags(&config_path);
     }
 }
 
@@ -45,6 +51,10 @@ fn main() {
     let args = CLI::parse();
     let configs_path = Path::new(&target_dir);
     let project_name = args.project_name;
+    // TODO(Scott): Add back in when function works.
+    // if project_name == "search" {
+    //     project_name = commands::search_configs(&configs_path.display().to_string());
+    // }
     let config_exists = configs_path.join(format!("{project_name}.json")).exists();
     let config_path = configs_path
         .join(format!("{project_name}.json"))

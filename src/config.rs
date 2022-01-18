@@ -48,4 +48,10 @@ impl Config {
     pub fn set_flags(&mut self, flags: Vec<String>) {
         self.flags = flags;
     }
+    pub fn clear_flags(&mut self) {
+        self.flags.clear();
+    }
+    pub fn clear_args(&mut self) {
+        self.args.clear();
+    }
 }
