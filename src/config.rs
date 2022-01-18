@@ -36,13 +36,16 @@ impl Config {
         };
         config.to_file(path)
     }
-    pub fn update_build_command(&mut self, command: &str) {
+    pub fn set_dir(&mut self, dir: &str) {
+        self.project_dir = dir.to_string();
+    }
+    pub fn set_build_command(&mut self, command: &str) {
         self.build_command = command.to_string();
     }
-    pub fn add_args(&mut self, mut args: Vec<String>) {
-        self.args.append(&mut args);
+    pub fn set_args(&mut self, args: Vec<String>) {
+        self.args = args;
     }
-    pub fn add_flags(&mut self, mut flags: Vec<String>) {
-        self.flags.append(&mut flags);
+    pub fn set_flags(&mut self, flags: Vec<String>) {
+        self.flags = flags;
     }
 }
