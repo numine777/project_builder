@@ -6,14 +6,17 @@ of json configuration that can be updated through the command line or in your fa
 also has the benefit of being able to be run from anywhere in your file system that has access to
 the command.
 
+To install the program, simply run:
+`cargo install rusco`
+
 Current usage examples:
 
 ```
-cargo run -- -p <project_name> // this will init the json configuration for the project
-cargo run -- -p <project_name> -s set_command <command name> // this needs to be a single string
+rusco -p <project_name> // this will init the json configuration for the project
+rusco -p <project_name> -s set_command <command name> // this needs to be a single string
 unbroken by whitespace (e.g. 'bazel' or 'docker-compose')
-cargo run -- -p <project_name> -s set_dir <absolute path the command needs to run in>
-cargo run -- -p <project_name> -s set_args <all args that should follow the command>
-cargo run -- -p <project_name> -s set_flags <optional flags that should always follow args>
+rusco -p <project_name> -s set_dir <absolute path the command needs to run in>
+rusco -p <project_name> -s set_args <all args that should follow the command>
+rusco -p <project_name> -s set_flags <optional flags that should always follow args>
 ```
 
