@@ -4,18 +4,22 @@ mod config;
 
 use crate::cli::CLI;
 use crate::config::Config;
-use std::path::Path;
 use clap::Parser;
+use dirs::home_dir;
+use std::path::Path;
 
-fn init() {
-    if !Path::new("/home/scott/.project_builder/").exists() {
-        let res = std::fs::create_dir("/home/scott/.project_builder/");
+fn init() -> String {
+    let home_dir = home_dir().unwrap().display().to_string();
+    let target_dir = format!("{home_dir}/.project_builder/").to_string();
+    if !Path::new(&target_dir).exists() {
+        let res = std::fs::create_dir(&target_dir);
         if res.is_ok() {
             println!("Created directory to store configs");
         } else {
             println!("Failed to create directory");
         }
     }
+    return target_dir;
 }
 
 fn handle_command(command: &str, config_path: &str) {
@@ -37,12 +41,15 @@ fn handle_command(command: &str, config_path: &str) {
 }
 
 fn main() {
-    init();
+    let target_dir = init();
     let args = CLI::parse();
-    let configs_path = Path::new("/home/scott/.project_builder/");
+    let configs_path = Path::new(&target_dir);
     let project_name = args.project_name;
     let config_exists = configs_path.join(format!("{project_name}.json")).exists();
-    let config_path = configs_path.join(format!("{project_name}.json")).display().to_string();
+    let config_path = configs_path
+        .join(format!("{project_name}.json"))
+        .display()
+        .to_string();
     let command = args.subcommand;
     if config_exists {
         handle_command(&command, &config_path);
