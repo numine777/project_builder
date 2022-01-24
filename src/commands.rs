@@ -25,7 +25,7 @@ pub fn set_command(config_path: &str) {
 
 pub fn set_execution_dir(config_path: &str) {
     let mut execution_dir = String::new();
-    println!("Enter a execution command");
+    println!("Enter a directory to run the command in");
     std::io::stdin().read_line(&mut execution_dir).unwrap();
     let mut config = Config::from_file(config_path).unwrap();
     config.set_dir(&execution_dir.trim());
@@ -34,7 +34,7 @@ pub fn set_execution_dir(config_path: &str) {
 
 pub fn set_execution_args(config_path: &str) {
     let mut execution_args = String::new();
-    println!("Enter a command argument");
+    println!("Enter execution arguments");
     std::io::stdin().read_line(&mut execution_args).unwrap();
     let args = execution_args
         .split(" ")
@@ -47,7 +47,7 @@ pub fn set_execution_args(config_path: &str) {
 
 pub fn set_execution_flags(config_path: &str) {
     let mut execution_flags = String::new();
-    println!("Enter a execution argument");
+    println!("Enter execution flags");
     std::io::stdin().read_line(&mut execution_flags).unwrap();
     let args = execution_flags
         .split(" ")
